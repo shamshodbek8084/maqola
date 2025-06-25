@@ -28,9 +28,9 @@ class MaqolaListCreateAPIView(APIView):
 # Word faylga dizaynli chiqarish
 class ExportMaqolaDocxView(APIView):
     def get(self, request):
-        maqolalar = Maqola.objects.all().order_by('number')
+        maqolalar = Maqola.objects.all().order_by('-id')
         doc = Document()
-        last = maqolalar.last()
+        last = maqolalar.first()
 
         heading_text = (
             "Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti Kiberxavfsizlik fakulteti\n"
