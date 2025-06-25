@@ -7,4 +7,4 @@ class Maqola_Serializer(serializers.ModelSerializer):
 
     class Meta():
         model = Maqola
-        fields = ['id', 'number', 'title', 'format', 'publication_type', 'journal_name', 'volume', 'issue', 'published_date', 'pages', 'bet_soni', 'mualliflar_soni', 'authors', 'journal_information',]
+        fields = ['talaba_fish', 'fakultet', 'fakultet_raqami', 'guruh_raqami', 'number', 'title', 'format', 'publication_type', 'journal_name', 'volume', 'issue', 'published_date', 'pages', 'bet_soni', 'mualliflar_soni', 'authors', 'journal_information',]

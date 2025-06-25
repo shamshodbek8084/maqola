@@ -3,6 +3,13 @@ from django.db import models
 # Create your models here.
 
 class Maqola(models.Model):
+
+    talaba_fish = models.CharField(max_length=256)
+    fakultet = models.TextField(max_length=256)
+    fakultet_raqami = models.PositiveIntegerField()
+    guruh_raqami = models.CharField(max_length=256)
+    
+
     STATUS_MAQOLA = (
         ('Elektron', 'Elektron'),
         ('Bosma', 'Bosma'),

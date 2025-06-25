@@ -30,12 +30,12 @@ class ExportMaqolaDocxView(APIView):
     def get(self, request):
         maqolalar = Maqola.objects.all().order_by('number')
         doc = Document()
+        last = maqolalar.last()
 
-        # Sarlavha
         heading_text = (
             "Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti Kiberxavfsizlik fakulteti\n"
-            "60610300 – “Axborot xavfsizligi (Axborot-kommunikatsiya texnologiyalari va servis)” ta’lim yo‘nalishi 713-23-guruh "
-            "talabasi Toshqobilov Shamshodbek Erkin o‘g‘lining\n"
+            f"{last.fakultet_raqami}"" - " f"“{last.fakultet} (Axborot-kommunikatsiya texnologiyalari va servis)” ta’lim yo‘nalishi  {last.guruh_raqami}-guruh "
+            f"talabasi {last.talaba_fish}ning\n"
             "ILMIY ISHLARI RO‘YXATI"
         )
         heading = doc.add_paragraph(heading_text)
@@ -53,9 +53,9 @@ class ExportMaqolaDocxView(APIView):
             "№",
             "Ilmiy ishning nomi",
             "Bosma, qo‘l yozma yoki elektron",
-            "Jurnal, to‘plam (yil, nomer, betlari), nashriyot yoki mualliflik guvohnomasi nomeri",
+            "Jurnal, to‘plam (yil, nomer, betlari), nashriyot yoki mualliflik guvohnomasi raqami",
             "Bosma taboq yoki betlar soni, mualliflik ishtiroki",
-            "Hammualliflarning familiyalari, ismlari, otalarining ismlari"
+            "Mualliflarning F.I.Sh"
         ]
         hdr_cells = table.rows[0].cells
         for i, header in enumerate(headers):
@@ -81,3 +81,4 @@ class ExportMaqolaDocxView(APIView):
         response['Content-Disposition'] = 'attachment; filename=ilmiy_ishlar_ro‘yxati.docx'
         doc.save(response)
         return response
+
